@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap');
+
+.marketMap {
+    display: flex; 
+    flex-direction: column;
+    width: 535px;
+    margin: 10px 20px 10px;
+    background-color: rgb(229, 229, 229);
+    border-radius: 10px;
+    font-family: 'Prompt', sans-serif;
+}
+
+.marketMap .market{
+    margin: 10px;
+    align-self: center;
+}
+
+.marketMap .colMarket {
+    display: flex;
+    justify-content: center;
+}
+
+.marketMap .rowMarket {
+    width: 15px;
+    height: 15px;
+    margin: 3px 5px 3px;
+    background-color: rgb(171, 175, 175);
+}
+
+.marketMap .rowMarket:hover {
+    background-color: rgb(125, 126, 126);
+}
+
+.marketMap .zone {
+    width: 100%;
+    height: 60px;
+    align-self: center;
+    text-align: center;
+    color: white;
+    background-color: rgb(128, 135, 167);
+    border-radius: 10px 10px 0px 0px;
+}

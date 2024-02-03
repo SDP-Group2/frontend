@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap');
+
+.profile {
+    display: flex;
+    width: 535px;
+    margin: 20px;
+    font-family: 'Prompt', sans-serif;
+}
+
+.profile .leftSide {
+    flex: 60%;
+    display: flex;
+    padding: 10px;
+    height: 80px;
+    font-size: 13px;
+    margin-right: 20px;
+    background-color: #e6e6e6;
+    border-radius: 10px;
+}
+
+.profile .leftSide .picture {
+    width: 60px;
+    height: 60px;
+    margin: 10px 20px 10px;
+    background: url('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png');
+    background-repeat: no-repeat;
+    background-size: 60px 60px;
+    background-color: rgb(105, 167, 167);
+    border: 2px solid rgb(128, 135, 167);
+    border-radius: 30px;
+}
+
+
+.profile .leftSide span {
+    font-size: 10px;
+    color: rgb(69, 74, 148);
+}
+
+.profile .leftSide .text {
+    font-size: 12px;
+    color: rgb(0, 0, 0);
+}
+
+.profile .rightSide {
+    flex: 40%;
+    height: 80px;
+    padding: 10px;
+    background-color: #e6e6e6;
+    border-radius: 10px;
+}
+
+.profile .rightSide span {
+    font-size: 12px;
+    color: rgb(69, 74, 148);
+}
+
+.profile .rightSide div {
+    font-size: 20px;
+    text-align: center;
+    margin-top: 10px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(129, 194, 30);
+    border-radius: 5px;
+}
