@@ -1,24 +1,15 @@
-import { Component, useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-import Navbar from './components/Navbar';
-import Profile from './components/Profile';
-import MarketMap from './components/MarketMap';
-import Reservation from './components/Reservation';
-import Footer from './components/Footer';
+import Report from './page/report';
 
 function App() {
   return (
-    <div className="content">
-      <Navbar />
-      <div className="veiwMobile">
-        <div>
-          <Profile />
-          <MarketMap />
-        </div>
-        <Reservation />
-      </div>
-      <Footer />
-    </div>
+    <Router>
+      <Routes>
+        <Route path='/report' element={<Report />} />
+      </Routes>
+    </Router>
   );
 }
 
