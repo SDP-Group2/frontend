@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+.select-stall {
+    width: 414px;
+    height: 736px;
+    padding: 3px 20px 20px 20px;
+    border-radius: 15px;
+    background-color: #F2F2F2;
+    font-family: "Inter", sans-serif;
+}
+
+.show-state {
+    font-size: 12px;
+    text-align: center;
+}
+
+.show-state .front {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.show-state .front div {
+    width: 50px;
+    height: 50px;
+    background-color: #53726E;
+    border-radius: 25px;
+    z-index: 1;
+}
+
+.show-state .front .payment .symbol{
+   background-color: #D9D9D9;
+}
+
+.show-state .back {
+    position: relative;
+    top: 33px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.show-state .back div{
+    width: 150px;
+    height: 15px;
+}
+
+.show-state .back .store-selectstall{
+    background-color: #A7BAB8;
+}
+
+.show-state .back .selectstall-payment{
+    background-color: #D9D9D9;
+}
+
+
