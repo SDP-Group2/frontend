@@ -3,28 +3,27 @@ import "../styles/Report.css";
 
 const Report = () =>{
     const [location, setLocation] = useState('');
-    const [notes, setNotes] = useState('');
+    const [report, setReport] = useState('');
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         try {
-            const response = await fetch('https://example.com/api/report', {
+            console.log({ location, report });
+            const response = await fetch('http://localhost:5000/report', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ location, notes })
+
+                body: JSON.stringify({ location, report  })
             });
 
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-
-            // Handle success
             console.log('Report submitted successfully!');
         } catch (error) {
-            // Handle error
             console.error('Error submitting report:', error);
         }
     };
@@ -43,8 +42,8 @@ const Report = () =>{
                 <textarea
                     className='input_large'
                     placeholder="ระบุหมายเหตุ"
-                    value={notes}
-                    onChange={(e) => setNotes(e.target.value)}
+                    value={report}
+                    onChange={(e) => setReport(e.target.value)}
                 />
                 <button type="submit">รายงาน</button>
             </form>
