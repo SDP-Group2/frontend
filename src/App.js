@@ -1,13 +1,14 @@
-import { Component, useState } from 'react';
-import './App.css';
-import Home from './components/Home';
-import SelectStall from './components/SelectStall';
+import Report from './page/report';
+import CreateStore from './page/CreateStore';
 
 function App() {
   return (
-    <div className="content">
-      <SelectStall />
-    </div>
+    <Router>
+      <Routes>
+        <Route path='/report' element={<Report />} />
+        <Route path='/CreateStore' element={<CreateStore />} />
+      </Routes>
+    </Router>
   );
 }
 
