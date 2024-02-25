@@ -1,4 +1,4 @@
-import { React, useState, useEffect  } from "react";
+import React, { useState } from 'react';
 import "../styles/CreateStore.css";
 import { IoStorefrontOutline } from "react-icons/io5";
 
@@ -12,6 +12,7 @@ const Report = () =>{
 
         try {
             const response = await fetch('http://localhost:5000/market', {
+                method: 'POST',
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
