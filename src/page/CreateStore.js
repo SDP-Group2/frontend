@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { React, useState, useEffect  } from "react";
 import "../styles/CreateStore.css";
 import { IoStorefrontOutline } from "react-icons/io5";
 
@@ -11,14 +11,13 @@ const Report = () =>{
         event.preventDefault();
 
         try {
-            console.log({ name, type, phone});
-            const response = await fetch('http://localhost:5000/report', {
+            const response = await fetch('http://localhost:5000/market', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'api-key': '2ff20d0d99465c2d929666dc96d0620dbbc48b2d79f575a3784ae786b76628a6'
                 },
-
-                body: JSON.stringify({ name,type,phone })
+                body: JSON.stringify({ name, type, phone })
             });
 
             if (!response.ok) {

@@ -13,7 +13,8 @@ const Report = () =>{
             const response = await fetch('http://localhost:5000/report', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'api-key': '2ff20d0d99465c2d929666dc96d0620dbbc48b2d79f575a3784ae786b76628a6'
                 },
 
                 body: JSON.stringify({ location, report  })

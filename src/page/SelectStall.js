@@ -1,8 +1,9 @@
-import { React, useState } from "react";
+import { React, useState,useEffect} from "react";
 import { GoCheckCircle } from "react-icons/go";
 import { GoChevronLeft } from "react-icons/go";
 import "../styles/SelectStall.css";
 import Stall from '../components/Stall';
+import Position_lock from '../components/lock';
 
 function SelectStall() {
     const initialSelectedCol = {};
@@ -19,7 +20,13 @@ function SelectStall() {
 
     const [selectedCol, setSelectedCol] = useState(initialSelectedCol);
     const [selectedRow, setSelectedRow] = useState(initialSelectedRow);
+    const [valueCol, setValueCol] = useState('');
 
+    useEffect(() => {
+        return () => {
+            setValueCol('');
+        };
+    }, []);
     const colCallback = (col) => {
         const updatedSelectedCol = {};
         Object.keys(selectedCol).forEach((key) => {
@@ -29,6 +36,7 @@ function SelectStall() {
         Object.keys(selectedRow).forEach((key) => {
             setSelectedRow((prevSelectedRow) => ({ ...prevSelectedRow, [key]: 0 }));
         });
+        setValueCol(col);
     };
 
     const rowCallback = (row) => {
@@ -44,7 +52,7 @@ function SelectStall() {
     const selectMonthly = () => {
         setSelectedRent({...selectedRent, daily: false, monthly: !selectedRent.monthly});
     };
-
+    console.log(valueCol);
     return (
         <div className="selectpage">
             <div className="nav_reserve">
@@ -90,13 +98,7 @@ function SelectStall() {
                 <div className="col">
                     <h4>เลือกล็อค</h4>
                     <div className="text_stall">
-                        {Object.keys(initialSelectedRow).map((key, index) => {
-                            return (
-                                <div>
-                                    <Stall text={key} state={1} select={selectedRow[key]} stall={(data) => rowCallback(data)}/>
-                                </div>
-                            );
-                        })}
+                    <Position_lock value={valueCol} stall={(data) => rowCallback(data)} />
                     </div>
                 </div>
                 <div className="radio">
