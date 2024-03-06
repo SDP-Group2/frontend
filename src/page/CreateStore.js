@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import "../styles/CreateStore.css";
+import { GoCheckCircle } from "react-icons/go";
+import { GoChevronLeft } from "react-icons/go";
 import { IoStorefrontOutline } from "react-icons/io5";
 
 const Report = () =>{
@@ -11,14 +13,14 @@ const Report = () =>{
         event.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:5000/market', {
-                method: 'POST',
+            console.log({ name, type, phone});
+            const response = await fetch('http://localhost:5000/report', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'api-key': '2ff20d0d99465c2d929666dc96d0620dbbc48b2d79f575a3784ae786b76628a6'
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ name, type, phone })
+
+                body: JSON.stringify({ name,type,phone })
             });
 
             if (!response.ok) {
@@ -31,34 +33,67 @@ const Report = () =>{
     };
 
     return(
-        <div>
-            <h1 className='topic-store'>จองล็อค</h1>
+        <div className="createstorepage">
+            <div className="nav_reserve">
+                <GoChevronLeft size={40} color="gray" style={{ fontWeight: 'bold' }} />
+                <h2>จองล็อค</h2>
+            </div>
+            <div className="show-state">
+                <div className="back">
+                    <div className="store_selectstall"></div>
+                    <div className="selectstall_payment"></div>
+                </div>
+                <div className="front">
+                    <div className="store">
+                        <div className="symbol">
+                        </div>
+                        <h4>ข้อมูลร้าน</h4>
+                    </div>
+                    <div className="select_stall">
+                        <div className="symbol"></div>
+                        <h4>จองล็อค</h4>
+                    </div>
+                    <div className="payment">
+                        <div className="symbol"></div>
+                        <h4>จ่ายเงิน</h4>
+                    </div>
+                </div>
+            </div>
             <div className='form-reservation'>
-            <form className='reservation' onSubmit={handleSubmit}>
-                <p className='sub-topic'><IoStorefrontOutline /> ข้อมูลร้าน</p>
-                <input
-                    type="text"
-                    className='input_resevation_1'
-                    placeholder="⚪ | ชื่อร้านค้า"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                />
-                <input
-                    type="text"
-                    className='input_resevation_2'
-                    placeholder="⚪ | ประเภทร้านค้า"
-                    value={type}
-                    onChange={(e) => setType(e.target.value)}
-                />
-                <input
-                    type="text"
-                    className='input_resevation_2'
-                    placeholder="⚪ | เบอร์โทรศัพท์ร้านค้า"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                />
-                <button className="button-reservation" type="submit">บันทึก</button>
-            </form>
+                <form className='reservation' onSubmit={handleSubmit}>
+                    <p className='sub-topic'><IoStorefrontOutline /> ข้อมูลร้าน</p>
+                    <div>
+                        <h4>⚪ | </h4>
+                        <input
+                            type="text"
+                            className='input_resevation_1'
+                            placeholder="ชื่อร้านค้า"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <h4>⚪ | </h4>
+                        <input
+                            type="text"
+                            className='input_resevation_2'
+                            placeholder="ประเภทร้านค้า"
+                            value={type}
+                            onChange={(e) => setType(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <h4>⚪ | </h4>
+                        <input
+                            type="text"
+                            className='input_resevation_2'
+                            placeholder="เบอร์โทรศัพท์ร้านค้า"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                        />
+                    </div>
+                    <button className="button-reservation" type="submit">บันทึก</button>
+                </form>
             </div>
         </div>
     );

@@ -1,32 +1,30 @@
-import { React, useState,useEffect} from "react";
+import { React, useState, useEffect } from "react";
 import { GoCheckCircle } from "react-icons/go";
 import { GoChevronLeft } from "react-icons/go";
 import "../styles/SelectStall.css";
 import Stall from '../components/Stall';
-import Position_lock from '../components/lock';
 
 function SelectStall() {
-    const initialSelectedCol = {};
     const keys = 'ABCDEFGHIJKLMNOPQRST';
-
-    for (let key of keys) {
-        initialSelectedCol[key] = 0;
-    }
-    
-    const initialSelectedRow = {};
-    for (let i = 1; i <= 20; i++) {
-        initialSelectedRow[String(i)] = 0;
-    }
-
-    const [selectedCol, setSelectedCol] = useState(initialSelectedCol);
-    const [selectedRow, setSelectedRow] = useState(initialSelectedRow);
-    const [valueCol, setValueCol] = useState('');
+    const [dataCol, setDataCol] = useState([]);
+    const [dataRow, setDataRow] = useState([]);
 
     useEffect(() => {
-        return () => {
-            setValueCol('');
-        };
+        const initialDataCol = {};
+        for (let key of keys) {
+            initialDataCol[key] = 0;
+        }
+        setDataCol(initialDataCol);
+    
+        const initialDataRow = Array.from({ length: 20 }, (_, index) => {
+            return {num: String(index + 1), status: 1 };
+        });
+        setDataRow(initialDataRow);
     }, []);
+
+    const [selectedCol, setSelectedCol] = useState([dataCol]);
+    const [selectedRow, setSelectedRow] = useState([dataRow]);
+
     const colCallback = (col) => {
         const updatedSelectedCol = {};
         Object.keys(selectedCol).forEach((key) => {
@@ -36,23 +34,41 @@ function SelectStall() {
         Object.keys(selectedRow).forEach((key) => {
             setSelectedRow((prevSelectedRow) => ({ ...prevSelectedRow, [key]: 0 }));
         });
-        setValueCol(col);
+
+        if(col){
+            fetchKeysFromDatabase()
+        }
+
+        const fetchKeysFromDatabase = () => {
+            fetch(`http://localhost:5000/market/${col}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'api-key': '2ff20d0d99465c2d929666dc96d0620dbbc48b2d79f575a3784ae786b76628a6'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    setDataRow(data);
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        };
     };
 
     const rowCallback = (row) => {
         setSelectedRow({ ...selectedRow, [row]: 1 });
     };
 
-    const [selectedRent, setSelectedRent] = useState({daily: false, monthly: false});
+    const [selectedRent, setSelectedRent] = useState({ daily: false, monthly: false });
 
     const selectDaily = () => {
-        setSelectedRent({...selectedRent, daily: !selectedRent.daily, monthly: false});
+        setSelectedRent({ ...selectedRent, daily: !selectedRent.daily, monthly: false });
     };
 
     const selectMonthly = () => {
-        setSelectedRent({...selectedRent, daily: false, monthly: !selectedRent.monthly});
+        setSelectedRent({ ...selectedRent, daily: false, monthly: !selectedRent.monthly });
     };
-    console.log(valueCol);
+
     return (
         <div className="selectpage">
             <div className="nav_reserve">
@@ -86,10 +102,10 @@ function SelectStall() {
                 <div className="col">
                     <h4>เลือกแถว</h4>
                     <div className="text_stall">
-                        {Object.keys(initialSelectedCol).map((key, index) => {
+                        {Object.keys(dataCol).map((key, index) => {
                             return (
                                 <div key={index}>
-                                    <Stall text={key} state={1} select={selectedCol[key]} stall={(data) => colCallback(data)}/>
+                                    <Stall text={key} state={1} select={selectedCol[key]} stall={(data) => colCallback(data)} />
                                 </div>
                             );
                         })}
@@ -98,7 +114,13 @@ function SelectStall() {
                 <div className="col">
                     <h4>เลือกล็อค</h4>
                     <div className="text_stall">
-                    <Position_lock value={valueCol} stall={(data) => rowCallback(data)} />
+                        {dataRow.map((row) => {
+                            return (
+                                <div>
+                                    <Stall text={row.num} state={row.status} select={selectedRow[row.num]} stall={(data) => rowCallback(data)} />
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
                 <div className="radio">

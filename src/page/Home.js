@@ -42,7 +42,7 @@ function Home() {
                 </div>
                 <div className="infor-rigth">
                     <div className="delete"></div>
-                    <div className="state">รออนุมัติ</div>
+                    <div className="state">รอ</div>
                 </div>
             </div>
         </div>

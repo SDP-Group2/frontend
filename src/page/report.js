@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import "../styles/Report.css";
+import { GoChevronLeft } from "react-icons/go";
 
 const Report = () =>{
     const [location, setLocation] = useState('');
@@ -30,8 +31,11 @@ const Report = () =>{
     };
 
     return(
-        <div>
-            <h1>รายงาน</h1>
+        <div className="reportpage">
+            <div className="nav_report">
+                <GoChevronLeft size={40} color="gray" style={{ fontWeight: 'bold' }} />
+                <h2>รายงาน</h2>
+            </div>
             <form className='location_form' onSubmit={handleSubmit}>
                 <input
                     type="text"
