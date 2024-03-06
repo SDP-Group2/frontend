@@ -8,7 +8,7 @@
 .lock_select {
     display: flex;
     justify-content: center;
-    align-items: center; /* Center the content vertically */
+    align-items: center;
     width: 35px;
     height: 35px;
     text-align: center;

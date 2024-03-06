@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "../styles/Stall.css";
 
 function Stall(props) {
-  const [itemNums, setItemNums] = useState([]); 
   let newText = "";
   const firstChar = props.text.charAt(0);
   if (firstChar >= 'A' && firstChar <= 'T' && props.select === 1) {

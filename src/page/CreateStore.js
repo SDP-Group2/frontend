@@ -1,35 +1,14 @@
 import React, { useState } from 'react';
 import "../styles/CreateStore.css";
-import { GoCheckCircle } from "react-icons/go";
+import { Link } from 'react-router-dom';
 import { GoChevronLeft } from "react-icons/go";
 import { IoStorefrontOutline } from "react-icons/io5";
-
-const Report = () =>{
+const CreateStore = () =>{
     const [name, setName] = useState('');
     const [type, setType] = useState('');
     const [phone, setPhone] = useState('');
-
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        try {
-            console.log({ name, type, phone});
-            const response = await fetch('http://localhost:5000/report', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-
-                body: JSON.stringify({ name,type,phone })
-            });
-
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            console.log('Report submitted successfully!');
-        } catch (error) {
-            console.error('Error submitting report:', error);
-        }
     };
 
     return(
@@ -59,7 +38,9 @@ const Report = () =>{
                     </div>
                 </div>
             </div>
+
             <div className='form-reservation'>
+                
                 <form className='reservation' onSubmit={handleSubmit}>
                     <p className='sub-topic'><IoStorefrontOutline /> ข้อมูลร้าน</p>
                     <div>
@@ -92,11 +73,14 @@ const Report = () =>{
                             onChange={(e) => setPhone(e.target.value)}
                         />
                     </div>
+                    <Link to={"/SelectStall"} state={{ name, type, phone }}>
                     <button className="button-reservation" type="submit">บันทึก</button>
+                </Link>
                 </form>
             </div>
+
         </div>
     );
 }
 
-export default Report;
+export default CreateStore;

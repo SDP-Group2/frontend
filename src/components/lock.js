@@ -3,15 +3,15 @@ import "../styles/lock.css";
 
 function PositionLock(props) {
   const [lockKeys, setLockKeys] = useState([]);
-  const [selectedIndices, setSelectedIndices] = useState([]); // Store the indices of selected items
-  const [fetchError, setFetchError] = useState(false); // Track fetch error status
+  const [selectedIndices, setSelectedIndices] = useState([]); 
+  const [fetchError, setFetchError] = useState(false);
 
   useEffect(() => {
     fetchKeysFromDatabase();
   }, [props.value]);
 
   const fetchKeysFromDatabase = () => {
-    setSelectedIndices([]); // Reset selected indices when fetching new data
+    setSelectedIndices([]); 
     fetch(`http://localhost:5000/market/${props.value}`, {
       method: 'GET',
       headers: {
@@ -34,11 +34,11 @@ function PositionLock(props) {
       });
       
       setLockKeys(filteredLockKeys);
-      setFetchError(false); // Reset fetch error state
+      setFetchError(false);
     })
     .catch(error => {
       console.error('Error fetching data:', error);
-      setFetchError(true); // Set fetch error state
+      setFetchError(true);
     });
   };
 
@@ -53,9 +53,8 @@ function PositionLock(props) {
       }
       setSelectedIndices(updatedSelectedIndices);
     }
-    props.stall(props.value);
+    props.stall(selectedIndices);
   };
-
   return (
     <div className="component_lock">
       {fetchError ? ( 

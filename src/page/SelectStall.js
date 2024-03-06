@@ -4,9 +4,15 @@ import { GoChevronLeft } from "react-icons/go";
 import "../styles/SelectStall.css";
 import Stall from '../components/Stall';
 import Position_lock from '../components/lock';
+import { useLocation } from 'react-router-dom';
 
 function SelectStall() {
     const initialSelectedCol = {};
+    const location = useLocation();
+    const { state } = location;
+    const { name, type, phone } = state;
+
+    console.log(state)
     const keys = 'ABCDEFGHIJKLMNOPQRST';
 
     for (let key of keys) {
@@ -21,6 +27,7 @@ function SelectStall() {
     const [selectedCol, setSelectedCol] = useState(initialSelectedCol);
     const [selectedRow, setSelectedRow] = useState(initialSelectedRow);
     const [valueCol, setValueCol] = useState('');
+    const [Multiple, setMultiple] = useState([]);
 
     useEffect(() => {
         return () => {
@@ -41,6 +48,7 @@ function SelectStall() {
 
     const rowCallback = (row) => {
         setSelectedRow({ ...selectedRow, [row]: 1 });
+
     };
 
     const [selectedRent, setSelectedRent] = useState({daily: false, monthly: false});
@@ -52,6 +60,10 @@ function SelectStall() {
     const selectMonthly = () => {
         setSelectedRent({...selectedRent, daily: false, monthly: !selectedRent.monthly});
     };
+    const handleSelectionChange = (selectedValues) => {
+        setMultiple(selectedValues);
+        console.log("Selected values:", selectedValues);
+      };
     console.log(valueCol);
     return (
         <div className="selectpage">
@@ -89,7 +101,7 @@ function SelectStall() {
                         {Object.keys(initialSelectedCol).map((key, index) => {
                             return (
                                 <div key={index}>
-                                    <Stall text={key} state={1} select={selectedCol[key]} stall={(data) => colCallback(data)}/>
+                                    <Stall text={key} state={1} onSelectionChange={handleSelectionChange} select={selectedCol[key]} stall={(data) => colCallback(data)}/>
                                 </div>
                             );
                         })}
@@ -98,7 +110,7 @@ function SelectStall() {
                 <div className="col">
                     <h4>เลือกล็อค</h4>
                     <div className="text_stall">
-                    <Position_lock value={valueCol} stall={(data) => rowCallback(data)} />
+                    <Position_lock value={valueCol} onSelectionChange={handleSelectionChange} stall={(data) => rowCallback(data)} />
                     </div>
                 </div>
                 <div className="radio">
