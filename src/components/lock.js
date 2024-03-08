@@ -19,6 +19,7 @@ function PositionLock(props) {
         'api-key': '2ff20d0d99465c2d929666dc96d0620dbbc48b2d79f575a3784ae786b76628a6'
       }
     })
+    
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');

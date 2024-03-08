@@ -1,20 +1,32 @@
 import { React, useState,useEffect} from "react";
 import { GoCheckCircle } from "react-icons/go";
 import { GoChevronLeft } from "react-icons/go";
+import { useLocation } from 'react-router-dom';
 import "../styles/SelectStall.css";
 import Stall from '../components/Stall';
 import Position_lock from '../components/lock';
-import { useLocation } from 'react-router-dom';
 
-function SelectStall() {
+
+
+function SelectStall(props) {
+    const [name, setName] = useState("");
+    const [type, setType] = useState("");
+    const [phone, setPhone] = useState("");
+
     const initialSelectedCol = {};
-    const location = useLocation();
-    const { state } = location;
-    const { name, type, phone } = state;
-
-    console.log(state)
     const keys = 'ABCDEFGHIJKLMNOPQRST';
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const name = params.get("name");
+        const type = params.get("type");
+        const phone = params.get("phone");
+    
+        setName(name);
+        setType(type);
+        setPhone(phone);
+      }, []);
 
+    console.log(name, type, phone);
     for (let key of keys) {
         initialSelectedCol[key] = 0;
     }
@@ -65,6 +77,7 @@ function SelectStall() {
         console.log("Selected values:", selectedValues);
       };
     console.log(valueCol);
+    console.log(name, type, phone);
     return (
         <div className="selectpage">
             <div className="nav_reserve">
@@ -110,7 +123,7 @@ function SelectStall() {
                 <div className="col">
                     <h4>เลือกล็อค</h4>
                     <div className="text_stall">
-                    <Position_lock value={valueCol} onSelectionChange={handleSelectionChange} stall={(data) => rowCallback(data)} />
+                    <Position_lock value={valueCol} stall={(data) => rowCallback(data)} />
                     </div>
                 </div>
                 <div className="radio">
