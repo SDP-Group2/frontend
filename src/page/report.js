@@ -5,11 +5,17 @@ import { GoChevronLeft } from "react-icons/go";
 const Report = () =>{
     const [location, setLocation] = useState('');
     const [report, setReport] = useState('');
+    const [showAlert, setShowAlert] = useState(false);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         try {
+            if (location.trim().length > 50 || report.trim().length > 127) {
+                setShowAlert(true);
+                return;
+            }
+
             console.log({ location, report });
             const response = await fetch('http://localhost:5000/report', {
                 method: 'POST',
@@ -17,7 +23,6 @@ const Report = () =>{
                     'Content-Type': 'application/json',
                     'api-key': '2ff20d0d99465c2d929666dc96d0620dbbc48b2d79f575a3784ae786b76628a6'
                 },
-
                 body: JSON.stringify({ location, report  })
             });
 
@@ -43,15 +48,19 @@ const Report = () =>{
                     placeholder="ระบุสถานที่"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
+                    required
                 />
                 <textarea
                     className='input_large'
                     placeholder="ระบุหมายเหตุ"
                     value={report}
                     onChange={(e) => setReport(e.target.value)}
+                    required
                 />
+                {showAlert && <div className="alert">กรุณาตรวจสอบด้วยว่าสถานที่ต้องไม่เกิน 50 ตัวอักษร และ ระบุหมายเหตุต้องไม่เกิน 127 ตัวอักษร</div>}
                 <button type="submit">รายงาน</button>
             </form>
+
         </div>
     );
 }
