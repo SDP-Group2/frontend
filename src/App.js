@@ -8,6 +8,7 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route path='/' element={<Home />} />
         <Route path='/report' element={<Report />} />
         <Route path='/CreateStore' element={<CreateStore />} />
         <Route path='/Home' element={<Home />} />
