@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import "../styles/notification.css";
 import { RiDeleteBin5Line } from "react-icons/ri";
 
-const Report = () =>{
+const Notificaiton = () =>{
     const [location, setLocation] = useState('');
     const [notes, setNotes] = useState('');
 
@@ -57,4 +57,4 @@ const Report = () =>{
     );
 }
 
-export default Report;
+export default Notificaiton;

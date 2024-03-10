@@ -51,6 +51,7 @@ const Report = () =>{
         } catch (error) {
             console.error('Error submitting report:', error);
             setShowFileAlert(false);
+            setFile(null);
         }
         
     };
@@ -70,7 +71,9 @@ const Report = () =>{
     return(
         <div className="reportpage">
             <div className="nav_report">
+                <a href='/'>
                 <GoChevronLeft size={40} color="gray" style={{ fontWeight: 'bold' }} />
+                </a>
                 <h2>รายงาน</h2>
             </div>
             <form className='location_form' onSubmit={handleSubmit}>

@@ -80,7 +80,9 @@ function SelectStall(props) {
     return (
         <div className="selectpage">
             <div className="nav_reserve">
+                <a href={`/CreateStore`}>
                 <GoChevronLeft size={40} color="gray" style={{ fontWeight: 'bold' }} />
+                </a>
                 <h2>จองล็อค</h2>
             </div>
             <div className="show-state">
@@ -91,7 +93,9 @@ function SelectStall(props) {
                 <div className="front">
                     <div className="store">
                         <div className="symbol">
+
                             <GoCheckCircle size={40} color="white" style={{ fontWeight: 'bold' }} />
+
                         </div>
                         <h4>ข้อมูลร้าน</h4>
                     </div>

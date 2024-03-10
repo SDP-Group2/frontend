@@ -20,19 +20,29 @@ const CreateStore = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (name.trim() !== "" && type !== "" && phone.trim() !== "" && name.trim().length <= 50 && phone.trim().length == 10 && /^\d+$/.test(phone.trim())){
-      console.log("Form submitted");
-      window.location.href = `/SelectStall?name=${name}&type=${type}&phone=${phone}`;
-    }
-    else{
+    if (name.trim() !== "" && type !== "" && phone.trim() !== "" && name.trim().length <= 50 && phone.trim().length == 10 && /^\d+$/.test(phone.trim())) {
+      const mobileNetworkCodes = ['080', '081', '082', '083', '084', '085', '086', '087', '088', '089', '09'];
+    
+      const isValidMobileNumber = mobileNetworkCodes.some(code => phone.trim().startsWith(code));
+    
+      if (isValidMobileNumber) {
+        console.log("Form submitted");
+        window.location.href = `/SelectStall?name=${name}&type=${type}&phone=${phone}`;
+      } else {
         setShowAlert(true);
+      }
+    } else {
+      setShowAlert(true);
     }
+    
   };
 
   return (
     <div className="createstorepage">
     <div className="nav_reserve">
+      <a href="/">
         <GoChevronLeft size={40} color="gray" style={{ fontWeight: 'bold' }} />
+        </a>
         <h2>จองล็อค</h2>
     </div>
     <div className="show-state">
@@ -62,7 +72,7 @@ const CreateStore = () => {
           <p className="sub-topic">
             <IoStorefrontOutline /> ข้อมูลร้าน
           </p>
-          {showAlert && <div className="alert">กรุณาตรวจสอบด้วยว่าชื่อร้านค้าต้องไม่เกิน 50 ตัวอักษร <br/>และ เบอร์โทรศัพท์ร้านค้าต้องเป็นเลขเท่ากับ 10 ตัว </div>}
+          {showAlert && <div className="alert">กรุณาตรวจสอบด้วยว่าชื่อร้านค้าต้องไม่เกิน 50 ตัวอักษร <br/>และ เบอร์โทรศัพท์ต้องเป็นเลขจริงที่ท่ากับ 10 ตัว </div>}
           <div>
 
             <h4>⚪ | </h4>
