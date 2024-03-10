@@ -22,10 +22,11 @@ const waittingpopup = ({ open, onClose }) => {
                 <div class="body-popup">
                     <div class="body-L">
                         <div class="name">
-                            จาก <p class="customer-name">ทำดี มีตัง</p>
+                            <p>จาก</p>
+                            <p class="customer-name">ทำดี มีตัง</p>
                         </div>
                         <div class="store">
-                            <p> <FaStore /> ร้ายยำอร่อยแซ่บ</p> <br></br>
+                            <p> <FaStore /> ร้ายยำอร่อยแซ่บ</p> 
                         </div>
                         <div class="stall">
                             <p> <RiErrorWarningFill /> B1, B2</p>

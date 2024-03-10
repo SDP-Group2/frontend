@@ -60,7 +60,6 @@ function SelectStall(props) {
 
     const rowCallback = (row) => {
         setSelectedRow({ ...selectedRow, [row]: 1 });
-
     };
 
     const [selectedRent, setSelectedRent] = useState({daily: false, monthly: false});
