@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap');
+
+.head_payment{
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    font-family: 'Prompt', sans-serif;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.payment_detail{
+    padding-top: 10px;
+    padding-left: 15px;
+    padding-right: 25px;
+    padding-bottom: 10px;
+    background: #FFFFFF;
+    border-radius: 20px;
+    margin: 25px;
+}
+
+.detail_head{
+    text-align: center;
+}
+.payment_bank{
+    font-size: 11px;
+    font-weight: bold;
+    font-family: 'Prompt', sans-serif;
+    color: #868182;
+}
+.payment_name{
+    color: #5E5B5C;
+    font-weight: bold;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+    .payment_name > p {
+        margin: 0;
+    }
+.payment-stall{
+    color: #868182;
+    display: flex;
+    justify-content: space-between;
+}
+    .payment-stall > p {
+        margin: 0;
+    }
+.payment-bill{
+    color: #53726E;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+}
+    .payment-bill > p {
+        margin: 5;
+    }
+    .btn-bill{
+        border: 1px solid #53726E;
+        background-color: #53726E;
+        border-radius: 10px;
+        padding: 5px 10px 5px 10px;
+        color: #fff;
+    }
+.user-no{
+    font-weight: bold;
+    font-size: 16px;
+    color: #53726E;
+}
+.price{
+    font-weight: bold;
+    font-size: 14px;
+    color: #868182;
+}
+.total-price{
+    font-weight: bold;
+    font-size: 16px;
+    color: #53726E;
+}
+.btn-submit{
+    width: 100%;
+    font-size: 24px;
+    font-weight: bold;
+    border: 1px solid #53726E;
+    border-radius: 23px;
+    background-color: #53726E;
+    color: #fff;
+    padding: 10px;
+}
