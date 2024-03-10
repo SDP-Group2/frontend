@@ -8,6 +8,7 @@ import Admin_dashboard from './page/AdminDashboard';
 import NotFound from './page/NotFound';
 import ViewReceipt from './page/viewReceipt';
 import Payment from './page/payment';
+import Notificaiton from './page/notification';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path='/Admin' element={<Admin_dashboard />} />
         <Route path='/viewReceipt' element={<ViewReceipt />} />
         <Route path='/payment' element={<Payment />} />
+        <Route path='/notification' element={<Notificaiton />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </Router>

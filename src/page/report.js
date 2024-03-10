@@ -15,9 +15,10 @@ const Report = () =>{
         try {
             if (location.trim().length > 50 || report.trim().length > 127 || location.trim().length === 0 || report.trim().length === 0) {
                 setShowAlert(true);
+                alert('กรุณากรอกข้อมูลให้ครบถ้วนและไม่เกินความยาวที่กำหนด (สถานที่ไม่เกิน 50 ตัวอักษร, หมายเหตุไม่เกิน 127 ตัวอักษร)');
             }
             if (file === null) {
-                setShowFileAlert(true);
+                alert('กรุณาเลือกไฟล์รูปภาพ');
             }
             else{
 
@@ -50,8 +51,6 @@ const Report = () =>{
         }
         } catch (error) {
             console.error('Error submitting report:', error);
-            setShowFileAlert(false);
-            setFile(null);
         }
         
     };
@@ -61,10 +60,10 @@ const Report = () =>{
         const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
         if (selectedFile && allowedTypes.includes(selectedFile.type)) {
             setFile(selectedFile);
-            setShowAlert(false);
         } else {
             setFile(null);
-            setShowAlert(true);
+            alert('กรุณาเลือกไฟล์รูปภาพที่เป็นนามสกุล .jpg, .jpeg หรือ .png');
+
         }
     };
 
@@ -92,14 +91,12 @@ const Report = () =>{
                     onChange={(e) => setReport(e.target.value)}
                     required
                 />
-                {showFileAlert && <div className="alert">กรุณาอัพโหลไฟล์ที่มีนามสกุล .jpg, .png หรือ .jpeg <br/>ขนาดไม่เกิน 10 MB</div>}
                 <p className='upload_head'>อัพโหลดรูปภาพ</p>
                 <input
                     type="file"
                     onChange={handleFileChange}
                     accept=".jpg, .png, .jpeg"
                 />
-                {showAlert && <div className="alert">กรุณาตรวจสอบช่องระบุสถานที่มีตัวอักษรไม่เกิน 50 ตัวอักษร และ ช่องระบุหมายเหตุตัวอักษรต้องไม่เกิน 127 ตัวอักษร</div>}
                 <button type="submit">รายงาน</button>
             </form>
 

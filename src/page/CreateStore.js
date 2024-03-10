@@ -86,6 +86,7 @@ const CreateStore = () => {
             />
           </div>
           <div>
+          <h4>⚪ | </h4>
             <select
               className="select_resevation_2"
               value={type}

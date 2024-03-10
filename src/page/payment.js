@@ -5,7 +5,7 @@ import { BsQrCode } from "react-icons/bs";
 import { GoCheckCircle } from "react-icons/go";
 import { GoChevronLeft } from "react-icons/go";
 
-function payment(){
+function Payment(){
     return(
         <div className='payment_page'>
             <div class="head_payment">
@@ -40,8 +40,8 @@ function payment(){
             <div class="payment_detail">
                 <div class="detail_head">
                     <h3><BsShop /> จ่ายเงิน</h3>
-                    <div class="qr">
-                        <img src="" width="170px" height="170px"></img>
+                    <div className="qr">
+                        <img src={process.env.PUBLIC_URL + '/qrcode_104094551_9b29e5cf42bcd30c9e8c63a962157753.png'} alt="QR Code" width="170px" height="170px" />
                     </div>
 
                 </div>
@@ -75,4 +75,4 @@ function payment(){
     );
 };
 
-export default payment;
+export default Payment;

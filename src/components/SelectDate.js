@@ -1,35 +1,66 @@
 import React, { useState } from 'react';
-import MultiDatepicker from 'react-multi-date-picker';
-import 'react-multi-date-picker/styles/layouts/mobile.css'; 
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css'; 
 import "../styles/SelectDate.css";
 
-const MultiSelectDate = () => {
-  const [selectedDates, setSelectedDates] = useState([]);
-  const excludedDates = ["2024-03-15", "2024-03-16"]; 
+const SelectDate = ({ handleDateChange }) => {
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
 
   const shouldDisableDate = (date) => {
-    const formattedDate = date.format("YYYY-MM-DD");
-    return excludedDates.includes(formattedDate);
+    const formattedDate = date.toISOString().slice(0,10);
+    const today = new Date().toISOString().slice(0,10);
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate());
+    const tomorrowFormatted = tomorrow.toISOString().slice(0,10);
+  
+    return (
+      formattedDate === today ||  
+      formattedDate > tomorrowFormatted 
+    );
   };
 
-  {selectedDates.map((date, index) => (
-    console.log(date.format("YYYY-MM-DD"))
-  ))}
+  const handleStartDateChange = (date) => {
+    setStartDate(date);
+    handleDateChange(date, endDate);
+  };
 
-  
+  const handleEndDateChange = (date) => {
+    setEndDate(date);
+    handleDateChange(startDate, date);
+  };
+
   return (
     <div className='select_date'>
       <h4>เลือกวัน</h4>
-      <MultiDatepicker
-        className='box_date'
-        value={selectedDates}
-        onChange={(dates) => setSelectedDates(dates)}
-        placeholder="เลือกวันที่" 
-        shouldDisableDate={shouldDisableDate} 
-      />
+      <div className="date_picker_container">
+        <div className="date_picker_item">
+          <label>วันที่เริ่ม:</label>
+          <DatePicker
+            className='box_date'
+            selected={startDate}
+            onChange={(date) => handleStartDateChange(date)} 
+            placeholderText="เลือกวันที่"
+            shouldCloseOnSelect={true}
+            filterDate={shouldDisableDate}
+            dateFormat="yyyy-MM-dd"
+          />
+        </div>
+        <div className="date_picker_item">
+          <label>วันที่สิ้นสุด:</label>
+          <DatePicker
+            className='box_date'
+            selected={endDate}
+            onChange={(date) => handleEndDateChange(date)} 
+            placeholderText="เลือกวันที่"
+            shouldCloseOnSelect={true}
+            filterDate={shouldDisableDate}
+            dateFormat="yyyy-MM-dd"
+          />
+        </div>
+      </div>
     </div>
   );
 };
 
-
-export default MultiSelectDate;
+export default SelectDate;

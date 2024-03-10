@@ -1,17 +1,18 @@
 import { React, useState,useEffect} from "react";
 import { GoCheckCircle } from "react-icons/go";
 import { GoChevronLeft } from "react-icons/go";
-import { useLocation } from 'react-router-dom';
 import "../styles/SelectStall.css";
 import Stall from '../components/Stall';
-import Position_lock from '../components/lock';
-
+import Positionlock from '../components/lock';
+import MultiSelectDate from '../components/SelectDate';
 
 
 function SelectStall(props) {
     const [name, setName] = useState("");
     const [type, setType] = useState("");
     const [phone, setPhone] = useState("");
+    const [startDate, setStartDate] = useState(null);
+    const [endDate, setEndDate] = useState(null);
 
     const initialSelectedCol = {};
     const keys = 'ABCDEFGHIJKLMNOPQRST';
@@ -20,11 +21,13 @@ function SelectStall(props) {
         const name = params.get("name");
         const type = params.get("type");
         const phone = params.get("phone");
-    
+
         setName(name);
         setType(type);
         setPhone(phone);
-      }, []);
+    }, []);
+
+
 
     console.log(name, type, phone);
     for (let key of keys) {
@@ -40,12 +43,14 @@ function SelectStall(props) {
     const [selectedRow, setSelectedRow] = useState(initialSelectedRow);
     const [valueCol, setValueCol] = useState('');
     const [Multiple, setMultiple] = useState([]);
+    const [selectedDates, setSelectedDates] = useState([]);
+
 
     useEffect(() => {
-        return () => {
-            setValueCol('');
-        };
-    }, []);
+
+        if (valueCol !== '') {
+        }
+    }, [valueCol]);
     const colCallback = (col) => {
         const updatedSelectedCol = {};
         Object.keys(selectedCol).forEach((key) => {
@@ -59,7 +64,9 @@ function SelectStall(props) {
     };
 
     const rowCallback = (row) => {
-        setSelectedRow({ ...selectedRow, [row]: 1 });
+        setSelectedRow(row);
+        console.log(selectedRow)
+
     };
 
     const [selectedRent, setSelectedRent] = useState({daily: false, monthly: false});
@@ -73,10 +80,33 @@ function SelectStall(props) {
     };
     const handleSelectionChange = (selectedValues) => {
         setMultiple(selectedValues);
-        console.log("Selected values:", selectedValues);
+
       };
-    console.log(valueCol);
-    console.log(name, type, phone);
+      const handleDateChange = (startDate, endDate) => {
+
+        if (startDate && endDate && startDate.getTime() > endDate.getTime()) {
+            alert("วันที่เริ่มต้นต้องมาก่อนวันที่สิ้นสุด");
+            setStartDate(null);
+            setEndDate(null); 
+            return;
+        }
+        setStartDate(startDate);    
+        setEndDate(endDate); 
+        console.log("Start Date:", startDate);
+        console.log("End Date:", endDate);
+    };
+      
+    const handleSubmit = () => {
+        if (!startDate || !endDate || !name || !type || !phone) {
+            alert("กรุณากรอกข้อมูลให้ครบทุกช่อง");
+            return;
+        }
+
+        window.location.href = `/payment?startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}&name=${name}&type=${type}&phone=${phone}&stall=${valueCol}&row=${selectedRow}`;
+    };
+
+
+
     return (
         <div className="selectpage">
             <div className="nav_reserve">
@@ -126,9 +156,10 @@ function SelectStall(props) {
                 <div className="col">
                     <h4>เลือกล็อค</h4>
                     <div className="text_stall">
-                    <Position_lock value={valueCol} stall={(data) => rowCallback(data)} />
+                    <Positionlock value={valueCol} stall={rowCallback} />
                     </div>
                 </div>
+                <MultiSelectDate handleDateChange={handleDateChange} />
                 {/* <div className="radio">
                     <div>
                         <div onClick={() => selectDaily()}></div>
@@ -141,7 +172,7 @@ function SelectStall(props) {
                         <h4>รายเดือน</h4>
                     </div>
                 </div> */}
-                <div className="save">
+                <div className="save" onClick={handleSubmit}>
                     <h2>บันทึก</h2>
                 </div>
             </div>

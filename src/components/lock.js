@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "../styles/lock.css";
-import SelectDate from './SelectDate';
 
 function PositionLock(props) {
   const [lockKeys, setLockKeys] = useState([]);
@@ -11,6 +10,10 @@ function PositionLock(props) {
     fetchKeysFromDatabase();
   }, [props.value]);
 
+  useEffect(() => {
+    props.stall(selectedIndices); // Call stall callback when selectedIndices changes
+  }, [selectedIndices, props.stall]);
+
   const fetchKeysFromDatabase = () => {
     setSelectedIndices([]); 
     fetch(`http://localhost:5000/market/${props.value}`, {
@@ -20,7 +23,6 @@ function PositionLock(props) {
         'api-key': '2ff20d0d99465c2d929666dc96d0620dbbc48b2d79f575a3784ae786b76628a6'
       }
     })
-    
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -44,33 +46,32 @@ function PositionLock(props) {
     });
   };
 
-  const handleLockClick = (index) => {
-    const clickedItem = lockKeys[index];
+  const handleLockClick = (num) => {
+    const clickedItem = lockKeys.find(item => item.num === num);
     if (clickedItem.status !== 1) {
       const updatedSelectedIndices = [...selectedIndices];
-      if (updatedSelectedIndices.includes(index)) {
-        updatedSelectedIndices.splice(updatedSelectedIndices.indexOf(index), 1);
+      const selectedIndex = updatedSelectedIndices.indexOf(num);
+      if (selectedIndex !== -1) {
+        updatedSelectedIndices.splice(selectedIndex, 1);
       } else {
-        updatedSelectedIndices.push(index);
+        updatedSelectedIndices.push(num);
       }
       setSelectedIndices(updatedSelectedIndices);
     }
-    props.stall(selectedIndices);
   };
+  
+
   return (
     <div className="component_lock">
       {fetchError ? ( 
         <div className="error-message">ไม่มีรายการที่ท่านเลือก</div>
       ) : (
-        <div>
-          {lockKeys.map((item, index) => (
-            <div className={`lock_select ${item.status === 1 ? 'status_1' : 'status_0'} ${selectedIndices.includes(index) ? 'red-background' : ''}`} key={index} onClick={() => handleLockClick(index)}>
-              {item.status === 1 && <div className="div_lock"></div>}
-              <h3>{item.num}</h3>
-            </div>
-          ))}
-          <SelectDate/>
-        </div>
+        lockKeys.map((item, index) => (
+          <div className={`lock_select ${item.status === 1 ? 'status_1' : 'status_0'} ${selectedIndices.includes(item.num) ? 'red-background' : ''}`} key={index} onClick={() => handleLockClick(item.num)}>
+            {item.status === 1 && <div className="div_lock"></div>}
+            <h3>{item.num}</h3>
+          </div>
+        ))
       )}
     </div>
   );

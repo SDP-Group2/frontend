@@ -17,7 +17,6 @@ function Home() {
         .then(response => response.json())
         .then(data => {
             const mergedData = mergeDataByName(data);
-            console.log(mergedData);
             setReservationData(mergedData);
         })
         .catch(error => {
@@ -28,7 +27,6 @@ function Home() {
     const mergeDataByName = (data) => {
         const mergedData = {};
         data.forEach(item => {
-            console.log(item);
             const combinedKey = `${item.lock_key}${item.num}`;
             if (!mergedData[item.Name_shop]) {
                 mergedData[item.Name_shop] = {
@@ -52,7 +50,6 @@ function Home() {
 
     const handleDelete = (id) => {
         const confirmDelete = window.confirm('คุณต้องการลบข้อมูลนี้ใช่หรือไม่?');
-        console.log(id)
         if (confirmDelete) {
             fetch(`http://localhost:5000/stall/${id}`, {
                 method: 'DELETE',
@@ -93,7 +90,7 @@ function Home() {
                     </a>
                 </div>
                 <div>
-                    <a href='/report' className="icon-link">
+                    <a href='/notification' className="icon-link">
                         <div><FaBell /></div>
                         <h4>แจ้งเตือน</h4>
                     </a>
