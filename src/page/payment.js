@@ -21,7 +21,9 @@ function payment(){
             <div class="payment_detail">
                 <div class="detail_head">
                     <p><BsShop /> จ่ายเงิน</p>
-                    <BsQrCode />
+                    <div class="qr">
+                        <img src="" width="170px" height="170px"></img>
+                    </div>
 
                 </div>
                 <div class="payment_bank">
