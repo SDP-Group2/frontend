@@ -4,6 +4,7 @@ import CreateStore from './page/CreateStore';
 import Home from './page/Home';
 import SelectStall from './page/SelectStall';
 import Admin_dashboard from './page/AdminDashboard';
+import NotFound from './page/NotFound';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path='/CreateStore' element={<CreateStore />} />
         <Route path='/SelectStall' element={<SelectStall />} />
         <Route path='/Admin' element={<Admin_dashboard />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </Router>
   );

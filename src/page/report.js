@@ -50,6 +50,7 @@ const Report = () =>{
         }
         } catch (error) {
             console.error('Error submitting report:', error);
+            setShowFileAlert(false);
         }
         
     };
