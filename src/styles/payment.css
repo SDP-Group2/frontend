@@ -16,7 +16,9 @@
     padding-bottom: 10px;
     background: #FFFFFF;
     border-radius: 20px;
-    margin: 25px;
+    margin: auto;
+    width: 50%;
+    display: block;
 }
 
 .detail_head{
