@@ -78,6 +78,9 @@ body{
 
 .upload_head{
   color: #53726E;
-  margin-top: 3px;
+  margin-top: 20px;
 }
 
+input[type="file"] {
+  margin-top: 0px;
+}

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import "../styles/notification.css";
 import { RiDeleteBin5Line } from "react-icons/ri";
+import { GoChevronLeft } from "react-icons/go";
 
-const Notificaiton = () =>{
+const Report = () =>{
     const [location, setLocation] = useState('');
     const [notes, setNotes] = useState('');
 
@@ -31,10 +32,11 @@ const Notificaiton = () =>{
     };
 
     return(
-        <div>
+        <div className='notification_page'>
             <div class="head_info">
                 <div class="txt_head_info">
-                    <p>การแจ้งเตือน</p>
+                    <GoChevronLeft size={40} color="gray" style={{ fontWeight: 'bold' }} />
+                    <h2>การแจ้งเตือน</h2>
                 </div>
             </div>
 
@@ -50,11 +52,8 @@ const Notificaiton = () =>{
                 </div>
 
             </div>
-           
-           
-           
         </div>
     );
 }
 
-export default Notificaiton;
+export default Report;

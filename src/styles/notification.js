@@ -31,7 +31,7 @@ const Report = () =>{
     };
 
     return(
-        <div>
+        <div className='notification_page'>
             <div class="head_info">
                 <div class="txt_head_info">
                     <p>การแจ้งเตือน</p>
@@ -50,9 +50,6 @@ const Report = () =>{
                 </div>
 
             </div>
-           
-           
-           
         </div>
     );
 }
