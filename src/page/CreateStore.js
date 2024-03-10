@@ -62,7 +62,7 @@ const CreateStore = () => {
           <p className="sub-topic">
             <IoStorefrontOutline /> ข้อมูลร้าน
           </p>
-          {showAlert && <div className="alert">กรุณาตรวจสอบด้วยว่าชื่อร้านค้าต้องไม่เกิน 50 ตัวอักษร <br/>และ เบอร์โทรศัพท์ร้านค้าต้องเป็นเลขเท่ากับ 10 ตัว </div>}
+          {showAlert && <div className="alert">*ชื่อร้านค้าต้องไม่เกิน 50 ตัวอักษร <br/>*เบอร์โทรศัพท์ร้านค้าต้องไม่เกิน 10 ตัวเลข </div>}
           <div>
 
             <h4>⚪ | </h4>
@@ -76,7 +76,6 @@ const CreateStore = () => {
             />
           </div>
           <div>
-            <h4>⚪ | </h4>
             <select
               className="select_resevation_2"
               value={type}

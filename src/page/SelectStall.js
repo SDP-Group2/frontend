@@ -125,7 +125,7 @@ function SelectStall(props) {
                     <Position_lock value={valueCol} stall={(data) => rowCallback(data)} />
                     </div>
                 </div>
-                <div className="radio">
+                {/* <div className="radio">
                     <div>
                         <div onClick={() => selectDaily()}></div>
                         {selectedRent.daily && <div className="select_rent"></div>}
@@ -136,7 +136,7 @@ function SelectStall(props) {
                         {selectedRent.monthly && <div className="select_rent"></div>}
                         <h4>รายเดือน</h4>
                     </div>
-                </div>
+                </div> */}
                 <div className="save">
                     <h2>บันทึก</h2>
                 </div>

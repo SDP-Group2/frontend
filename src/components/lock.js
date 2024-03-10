@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../styles/lock.css";
+import SelectDate from './SelectDate';
 
 function PositionLock(props) {
   const [lockKeys, setLockKeys] = useState([]);
@@ -61,12 +62,15 @@ function PositionLock(props) {
       {fetchError ? ( 
         <div className="error-message">ไม่มีรายการที่ท่านเลือก</div>
       ) : (
-        lockKeys.map((item, index) => (
-          <div className={`lock_select ${item.status === 1 ? 'status_1' : 'status_0'} ${selectedIndices.includes(index) ? 'red-background' : ''}`} key={index} onClick={() => handleLockClick(index)}>
-            {item.status === 1 && <div className="div_lock"></div>}
-            <h3>{item.num}</h3>
-          </div>
-        ))
+        <div>
+          {lockKeys.map((item, index) => (
+            <div className={`lock_select ${item.status === 1 ? 'status_1' : 'status_0'} ${selectedIndices.includes(index) ? 'red-background' : ''}`} key={index} onClick={() => handleLockClick(index)}>
+              {item.status === 1 && <div className="div_lock"></div>}
+              <h3>{item.num}</h3>
+            </div>
+          ))}
+          <SelectDate/>
+        </div>
       )}
     </div>
   );
