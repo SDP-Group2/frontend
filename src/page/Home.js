@@ -1,5 +1,10 @@
 import React from 'react'
 import "../styles/Home.css";
+import Reserved from '../components/Reserve';
+import { FaStore } from "react-icons/fa";
+import { GoPerson } from "react-icons/go";
+import { GoUnread } from "react-icons/go";
+import { GoLog } from "react-icons/go";
 
 function Home() {
     return (
@@ -7,44 +12,33 @@ function Home() {
         <h2>หน้าหลัก</h2>
         <div className="select">
             <div>
-                <div></div>
+                <div>
+                    <FaStore size={35} style={{ fontWeight: 'bold' }}/>
+                </div>
                 <h4>จองล็อค</h4>
             </div>
             <div>
-                <div></div>
+                <div>
+                    <GoLog size={35} style={{ fontWeight: 'bold' }}/>
+                </div>
                 <h4>รายงาน</h4>
             </div>
             <div>
-                <div></div>
+                <div>
+                    <GoUnread size={35} style={{ fontWeight: 'bold' }}/>
+                </div>
                 <h4>แจ้งเตือน</h4>
             </div>
             <div>
-                <div></div>
+                <div>
+                    <GoPerson size={35} style={{ fontWeight: 'bold' }}/>
+                </div>
                 <h4>ข้อมูลส่วนตัว</h4>
             </div>
         </div>
         <h3>การจองของฉัน</h3>
         <div className="list_reserved">
-            <div className="reserved">
-                <div className="infor-left">
-                    <div>
-                        <h4 className="name">ร้านยำอร่อยแซ่บอร่อย</h4>
-                    </div>
-                    <div>
-                        <h4 className="stall_reserved">[B0, B1]</h4>
-                    </div>
-                    <div>
-                        <h4 className="date">[รายเดือน] 1 ม.ค 67 - 1 ก.พ. 67</h4>
-                    </div>
-                    <div>
-                        <h4 className="price">฿16,800</h4>
-                    </div>
-                </div>
-                <div className="infor-rigth">
-                    <div className="delete"></div>
-                    <div className="state">รอ</div>
-                </div>
-            </div>
+            <Reserved />
         </div>
       </div>
     );
