@@ -18,6 +18,7 @@ function App() {
         <Route path='/report' element={<Report />} />
         <Route path='/CreateStore' element={<CreateStore />} />
         <Route path='/SelectStall' element={<SelectStall />} />
+        <Route path='/Payment' element={<Payment />} />
         <Route path='/Admin' element={<Admin_dashboard />} />
         <Route path='/viewReceipt' element={<ViewReceipt />} />
         <Route path='/payment' element={<Payment />} />
