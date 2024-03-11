@@ -59,7 +59,9 @@ const CreateStore = () => {
   return (
     <div className="createstorepage">
     <div className="nav_reserve">
+      <a href="/">
         <GoChevronLeft size={40} color="gray" style={{ fontWeight: 'bold' }} />
+        </a>
         <h2>จองล็อค</h2>
     </div>
     <div className="show-state">

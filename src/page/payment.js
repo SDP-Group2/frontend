@@ -33,13 +33,14 @@ function Payment() {
         setStartDate(startDateParam ? new Date(startDateParam) : null);
         setEndDate(endDateParam ? new Date(endDateParam) : null);
 
-        if (startDateParam && endDateParam) {
+    }, []);
+    useEffect(() => {
+        if (startDate && endDate) {
             const diffTime = Math.abs(endDate - startDate);
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
             setDuration(diffDays > 1 ? parseInt(diffDays) : 1);
         }
-    }, []);
-
+    }, [startDate, endDate]);
     const handleFileChange = (e) => {
         const selectedFile = e.target.files[0];
         const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
