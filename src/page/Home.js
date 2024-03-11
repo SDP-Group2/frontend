@@ -18,6 +18,8 @@ function Home() {
         .then(data => {
             const mergedData = mergeDataByName(data);
             setReservationData(mergedData);
+            console.log(mergedData);
+            
         })
         .catch(error => {
             console.error('Error fetching data:', error);
@@ -72,6 +74,7 @@ function Home() {
             });
         }
     };
+
 
     return (
         <div className="home">
@@ -128,7 +131,7 @@ function Home() {
                         <div className="infor-rigth">
                         <FaTrash className="delete" onClick={() => handleDelete(item.Name_shop)} />
                             <div className="state">
-                                {item.status === 1 ? 'อนุมัติ' : 'รอ'}
+                                {item.status === "1" ? 'อนุมัติ' : 'รอ'}
                             </div>
                         </div>
                     </div>

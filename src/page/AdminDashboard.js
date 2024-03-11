@@ -4,7 +4,29 @@ import "../styles/AdminDashboard.css";
 function AdminDashboard() {
     const [notificationData, setNotificationData] = useState([]);
     const [stallData, setStallData] = useState([]);
-
+    useEffect(() => {
+        fetch('http://localhost:5000/stall/all', {
+            method: 'GET',
+            headers: {
+                "api-key": "2ff20d0d99465c2d929666dc96d0620dbbc48b2d79f575a3784ae786b76628a6",
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            const modifiedData = data.map(item => ({
+                ...item,
+                filePath: item.path_to_imag_slip.substring(item.path_to_imag_slip.indexOf("Public/") + 7)
+            }));
+            
+            setStallData(modifiedData);
+            const mergedData = mergeDataByName(modifiedData);
+            setStallData(mergedData); 
+        })
+        .catch(error => {
+            console.error('Error fetching stall data:', error);
+        });
+    }, []);
     useEffect(() => {
         fetch('http://localhost:5000/report/all', {
             method: 'GET',
@@ -24,34 +46,52 @@ function AdminDashboard() {
         .catch(error => {
             console.error('Error fetching notification data:', error);
         });
-    }, []); // เรียก useEffect เมื่อคอมโพเนนต์ถูกโหลดครั้งแรกเท่านั้น
+    }, []); 
 
-    useEffect(() => {
-        fetch('http://localhost:5000/stall/all', {
-            method: 'GET',
+    const handleNotificationPut = (notification) => {
+        console.log(notification);
+        fetch(`http://localhost:5000/report/${notification.id_report}`, {
+            method: 'PUT',
             headers: {
                 "api-key": "2ff20d0d99465c2d929666dc96d0620dbbc48b2d79f575a3784ae786b76628a6",
+            },
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('Notification data successfully updated.');
+                alert("ส่งแจ้งเตือนไปแล้ว")
+                window.location.reload();
+            } else {
+                console.error('Failed to update notification data.');
             }
         })
-        .then(response => response.json())
+        .catch(error => {
+            console.error('Error updating notification data:', error);
+        });
+    };
 
-        .then(data => {
-            console.log(data);
-            const modifiedData = data.map(item => ({
-                ...item,
-                filePath: item.path_to_imag_slip.substring(item.path_to_imag_slip.indexOf("Public/") + 7)
-            }));
-            
-            setStallData(modifiedData);
+    const handleStallPut = (stallData) => {
 
-            const mergedData = mergeDataByName(stallData);
-            setStallData(mergedData);
-            console.log(stallData)
+        fetch( `http://localhost:5000/stall/${stallData.ID_stall}`  , {
+            method: 'PUT',
+            headers: {
+                "api-key": "2ff20d0d99465c2d929666dc96d0620dbbc48b2d79f575a3784ae786b76628a6",
+            },
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('Stall data successfully updated.');
+                alert("อนุมัติแล้ว")
+                window.location.reload();
+            } else {
+                console.error('Failed to update stall data.');
+            }
         })
         .catch(error => {
-            console.error('Error fetching stall data:', error);
+            console.error('Error updating stall data:', error);
         });
-    }, []);
+    };
+
     const mergeDataByName = (data) => {
         const mergedData = {};
         data.forEach(item => {
@@ -90,9 +130,10 @@ function AdminDashboard() {
                     <h4>แสดงการรายงาน</h4>
                     {notificationData.map((notification, index) => (
                         <div key={index}>
-                            <p className="name_report">ที่ไหน : {notification.location} :</p> 
-                            <p className="place">เหตุ{notification.report}</p>
-                            <a href={`http://localhost:5000/${notification.filePath}`}  target="_blank"> รูปภาพประกอบ </a>
+                            <p className="name_report">ที่ไหน   {notification.location} </p> 
+                            <p className="place">เหตุ   {notification.report}</p>
+                            <a href={`http://localhost:5000/${notification.filePath}`}  target="_blank" className="picture_wish"> รูปภาพประกอบ </a>
+                            <button onClick={() => handleNotificationPut(notification)}>ได้รับการแก้ไขแล้ว</button>
                         </div>
                     ))}
                 </div>
@@ -105,9 +146,9 @@ function AdminDashboard() {
                         <div key={index}>
                             <p className="name_report">ชื่อร้านค้า {data.Name_shop} :</p> 
                             <p className="place">lock {data.combinedKey}</p>
-
-                            <a href={`http://localhost:5000/${data.filePath}`}  target="_blank"> รูปภาพประกอบ </a>
-                            <p>ตั้งแต่วันที่ {new Date(data.date_start).toLocaleDateString()} - {new Date(data.date_end).toLocaleDateString()}</p>
+                            <p className="date">ตั้งแต่วันที่ {new Date(data.date_start).toLocaleDateString()} - {new Date(data.date_end).toLocaleDateString()}</p>
+                            <a href={`http://localhost:5000/${data.filePath}`}  target="_blank" className="picture_wish"> รูปภาพประกอบ </a>
+                            <button onClick={() => handleStallPut(data)}>อนุมัติ</button>
                         </div>
                         
                     ))}

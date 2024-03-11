@@ -9,11 +9,13 @@
 
 .admin_dashboard .financial {
     display: flex;
+
 }
 
 .admin_dashboard .financial div h4{
     color: #7C7174;
     margin: 10px 20px 0px 20px;
+
 }
 
 .admin_dashboard .financial .graph_market {
@@ -211,3 +213,54 @@
     font-weight: bold;
     color: #e8e8e8;
 }
+.financial {
+    margin-top: 20px; /* ระยะห่างข้างบน */
+}
+
+.notification {
+    border: 1px solid #ccc; /* เส้นขอบ */
+    padding: 10px;
+    margin-bottom: 20px; /* ระยะห่างด้านล่าง */
+}
+
+.notification h4 {
+    color: #333; /* สีข้อความหัวข้อ */
+    font-size: 20px;
+    margin-bottom: 10px; /* ระยะห่างด้านล่างของหัวข้อ */
+}
+
+.notification-item {
+    margin-bottom: 10px; /* ระยะห่างของรายการข้อมูล */
+}
+
+.name_report {
+    font-weight: bold;
+}
+
+.place {
+    margin-bottom: 5px; /* ระยะห่างด้านล่างของข้อความ */
+}
+
+a {
+    color: blue; /* สีลิงก์ */
+    text-decoration: none; /* การเข้ารหัสลิงค์ */
+    margin-right: 10px; /* ระยะห่างด้านขวาของลิงค์ */
+}
+
+a:hover {
+    text-decoration: underline; /* การเข้ารหัสลิงค์เมื่อโฮเวอร์ */
+}
+
+.notification-item a {
+    border: 1px solid #ccc; /* เส้นขอบ */
+    padding: 5px 10px; /* การเสียบแน่นเกินไป */
+    border-radius: 5px; /* มุมโค้ง */
+    text-decoration: none; /* การเข้ารหัสลิงค์ */
+    display: inline-block; /* การแสดงเป็นบล็อก */
+}
+
+.picture_wish{
+    margin-top: 1%;
+    margin-left: 10%;
+}
+
