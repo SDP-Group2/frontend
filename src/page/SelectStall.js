@@ -105,8 +105,6 @@ function SelectStall(props) {
         window.location.href = `/payment?startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}&name=${name}&type=${type}&phone=${phone}&stall=${valueCol}&row=${selectedRow}`;
     };
 
-
-
     return (
         <div className="selectpage">
             <div className="nav_reserve">

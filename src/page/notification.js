@@ -22,11 +22,9 @@ const Report = () =>{
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-
-            // Handle success
             console.log('Report submitted successfully!');
         } catch (error) {
-            // Handle error
+
             console.error('Error submitting report:', error);
         }
     };

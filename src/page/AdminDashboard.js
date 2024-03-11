@@ -1,29 +1,79 @@
-import { React, useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/AdminDashboard.css";
-import ButtonMarket from '../components/ButtonMarket';
-import Popup from '../components/Popup';
-import WaittingPopup from '../components/Waittingpopup';
-import PointPopup from '../components/PointPopup';
-import DoughnutChart from '../components/DoughnutChart';
-import ColumnGraph from '../components/ColumnChart';
-import { FaStore } from "react-icons/fa";
-import { GoGear } from "react-icons/go";
 
 function AdminDashboard() {
-    const rangeCol= Array.from({ length: 20 }, (_, index) => index + 1);
-    const rangeRow = Array.from({ length: 20 }, (_, index) => index + 1);
+    const [notificationData, setNotificationData] = useState([]);
+    const [stallData, setStallData] = useState([]);
 
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
+    useEffect(() => {
+        fetch('http://localhost:5000/report/all', {
+            method: 'GET',
+            headers: {
+                "api-key": "2ff20d0d99465c2d929666dc96d0620dbbc48b2d79f575a3784ae786b76628a6",
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            const modifiedData = data.map(item => ({
+                ...item,
+                filePath: item.filePath.substring(item.filePath.indexOf("Public/") + 7)
+            }));
+            setNotificationData(modifiedData);
+        })
+        .catch(error => {
+            console.error('Error fetching notification data:', error);
+        });
+    }, []); // เรียก useEffect เมื่อคอมโพเนนต์ถูกโหลดครั้งแรกเท่านั้น
 
-    const handleOpenPopup = () => {
-        setIsPopupOpen(true);
-        console.log(isPopupOpen);
+    useEffect(() => {
+        fetch('http://localhost:5000/stall/all', {
+            method: 'GET',
+            headers: {
+                "api-key": "2ff20d0d99465c2d929666dc96d0620dbbc48b2d79f575a3784ae786b76628a6",
+            }
+        })
+        .then(response => response.json())
+
+        .then(data => {
+            console.log(data);
+            const modifiedData = data.map(item => ({
+                ...item,
+                filePath: item.path_to_imag_slip.substring(item.path_to_imag_slip.indexOf("Public/") + 7)
+            }));
+            
+            setStallData(modifiedData);
+
+            const mergedData = mergeDataByName(stallData);
+            setStallData(mergedData);
+            console.log(stallData)
+        })
+        .catch(error => {
+            console.error('Error fetching stall data:', error);
+        });
+    }, []);
+    const mergeDataByName = (data) => {
+        const mergedData = {};
+        data.forEach(item => {
+            const combinedKey = `${item.lock_key}${item.num}`;
+            if (!mergedData[item.Name_shop]) {
+                mergedData[item.Name_shop] = {
+                    ...item,
+                    combinedKey: [combinedKey],
+                    duration: calculateDuration(item.date_start, item.date_end)
+                };
+            } else {
+                mergedData[item.Name_shop].combinedKey.push(combinedKey);
+            }
+        });
+        return Object.values(mergedData);
     };
-
-    const handleClosePopup = () => {
-        setIsPopupOpen(false);
+    const calculateDuration = (start, end) => {
+        const startDate = new Date(start);
+        const endDate = new Date(end);
+        const duration = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+        return duration;
     };
-
     return (
         <div className="admin_dashboard">
             <div className='nav'>
@@ -34,107 +84,37 @@ function AdminDashboard() {
                         <p className="sub_title">ผู้ดูแลตลาด</p>
                     </div>
                 </div>
-                <div className="nav_R">
-                    <div class="zone_food">
-                        <p> <FaStore /> โซนอาหาร</p> 
-                    </div>
-                    <div class="zone_normal">
-                        <p> <FaStore /> โซนทั่วไป</p> 
-                    </div>
-                    <div class="zone_clothes">
-                        <p> <FaStore /> โซนเสื้อผ้า</p> 
-                    </div>
-                    <div>
-                        <GoGear style={{ fontSize: '30px', fontWeight: 'bold', margin: '20px'}} />
-                    </div>
-                </div>
             </div>
             <div className='financial'>
-                <div className='graph_market'>
-                    <h4>แผนภาพแสดงร้านค้า</h4>
-                    <div>
-                        <div>
-                            <h4 className="reserved_admin">จองแล้ว</h4>
-                            <h4 className="no_reserve">ห้ามจอง</h4>
-                            <h4 className="free">ว่าง</h4>
-                        </div>
-                        <DoughnutChart />
-                    </div>
-                </div>
-                <div className='graph_financial'>
-                    <h4>แผนภาพแสดงรายได้</h4>
-                    <ColumnGraph/>
-                </div>
                 <div className='notification'>
-                    <h4>แสดงการแจ้งเตือน</h4>
-                    <div>
-                        <p className="name_report">สมชาย หล่อเท่ :</p> 
-                        <p className="place">ห้องน้ำ</p>
-                        <p className="msg">ไม่สะอาด</p>
-                    </div>
+                    <h4>แสดงการรายงาน</h4>
+                    {notificationData.map((notification, index) => (
+                        <div key={index}>
+                            <p className="name_report">ที่ไหน : {notification.location} :</p> 
+                            <p className="place">เหตุ{notification.report}</p>
+                            <a href={`http://localhost:5000/${notification.filePath}`}  target="_blank"> รูปภาพประกอบ </a>
+                        </div>
+                    ))}
                 </div>
+
             </div>
-            <div className='infor_market'>
-                <h4>ข้อมูลของล็อคโซนอาหาร</h4>
-                <div className='name_col'>
-                    <h5>A</h5>
-                    <h5>B</h5>
-                    <h5>C</h5>
-                    <h5>D</h5>
-                    <h5>E</h5>
-                    <h5>F</h5>
-                    <h5>G</h5>
-                    <h5>H</h5>
-                    <h5>I</h5>
-                    <h5>J</h5>
-                    <h5>K</h5>
-                    <h5>L</h5>
-                    <h5>M</h5>
-                    <h5>N</h5>
-                    <h5>O</h5>
-                    <h5>P</h5>
-                    <h5>Q</h5>
-                    <h5>R</h5>
-                    <h5>S</h5>
-                    <h5>T</h5>
+            <div className='financial'>
+            <div className='notification'>
+                    <h4>แสดงการขออนุมัติ</h4>
+                    {stallData.map((data, index) => (
+                        <div key={index}>
+                            <p className="name_report">ชื่อร้านค้า {data.Name_shop} :</p> 
+                            <p className="place">lock {data.combinedKey}</p>
+
+                            <a href={`http://localhost:5000/${data.filePath}`}  target="_blank"> รูปภาพประกอบ </a>
+                            <p>ตั้งแต่วันที่ {new Date(data.date_start).toLocaleDateString()} - {new Date(data.date_end).toLocaleDateString()}</p>
+                        </div>
+                        
+                    ))}
                 </div>
-                <div className='div_market'>
-                    <div className='number'>
-                        <h5>1</h5>
-                        <h5>2</h5>
-                        <h5>3</h5>
-                        <h5>4</h5>
-                        <h5>5</h5>
-                        <h5>6</h5>
-                        <h5>7</h5>
-                        <h5>8</h5>
-                        <h5>9</h5>
-                        <h5>10</h5>
-                        <h5>11</h5>
-                        <h5>12</h5>
-                        <h5>13</h5>
-                        <h5>14</h5>
-                        <h5>15</h5>
-                        <h5>16</h5>
-                        <h5>17</h5>
-                        <h5>18</h5>
-                        <h5>19</h5>
-                        <h5>20</h5>
-                    </div>
-                    <div className='all_market'>
-                        {rangeCol.map((value, index) => (
-                            <div className='col_market'>
-                                {rangeCol.map((value, index) => (
-                                    <ButtonMarket popup = {(data) => handleOpenPopup(data)}/>
-                                ))}
-                            </div>
-                        ))}
-                    </div>
                 </div>
-            </div>
-            <WaittingPopup open={isPopupOpen} onClose={handleClosePopup} />
         </div>
     );
-  }
+}
 
-export default AdminDashboard
+export default AdminDashboard;
