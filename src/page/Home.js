@@ -126,7 +126,7 @@ function Home() {
                             </div>
                         </div>
                         <div className="infor-rigth">
-                        <FaTrash className="delete" onClick={() => handleDelete(item.ID_stall)} />
+                        <FaTrash className="delete" onClick={() => handleDelete(item.Name_shop)} />
                             <div className="state">
                                 {item.status === 1 ? 'อนุมัติ' : 'รอ'}
                             </div>

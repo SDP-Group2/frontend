@@ -70,6 +70,8 @@
 }
 
 .createstorepage .nav_reserve h2{
+
+    
     margin-left: 20px;
 }
 
@@ -164,4 +166,10 @@
     font-size: 13px;
     margin-left: 10px;
   }
+.alert-name{
+    text-align: center;
+    color: #b72836;
+    font-size: 13px;
+
+}
   
