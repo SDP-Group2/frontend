@@ -200,9 +200,12 @@ function AdminDashboard() {
                     <h4>แสดงการรายงาน</h4>
                     {notificationData.map((notification, index) => (
                         <div key={index}>
-                            <p className="name_report">ที่ไหน   {notification.location} </p> 
-                            <p className="place">เหตุ   {notification.report}</p>
-                            <a href={`http://localhost:5000/${notification.filePath}`}  target="_blank" className="picture_wish"> รูปภาพประกอบ </a>
+                            <p className="name_report">ที่ไหน {notification.location} </p> 
+                            <p className="place">เหตุ {notification.report}</p>
+                            <p className="place">สถานะ {notification.status === "0" ? "รอ" : notification.status === "1" ? "แก้ไขแล้ว" : "กำลังดำเนินการ"}</p>
+                            <a href={`http://localhost:5000/${notification.filePath}`} target="_blank" className="picture_wish"> รูปภาพประกอบ </a>
+                            {notification.status === 0 && <button onClick={() => handleNotificationPut(notification)}>ได้รับการแก้ไขแล้ว</button>}
+                            {notification.status === 0 && <button onClick={() => handleNotificationPut_wait(notification)}>กำลังดำเนินการ</button>}
                             <button onClick={() => handleNotificationPut(notification)}>ได้รับการแก้ไขแล้ว</button>
                             <button onClick={() => handleNotificationPut_wait(notification)}>กำลังดำเนินการ</button>
                             <button onClick={() => handleNotificationDelete(notification)}>ลบ</button>
@@ -215,15 +218,16 @@ function AdminDashboard() {
             <div className='notification'>
                     <h4>แสดงการขออนุมัติ</h4>
                     {stallData.filter(data => data.status === "0").map((data, index) => (
-                    <div key={index}>
-                        <p className="name_report">ชื่อร้านค้า {data.Name_shop} :</p> 
-                        <p className="place">lock {data.combinedKey}</p>
-                        <p className="date">ตั้งแต่วันที่ {new Date(data.date_start).toLocaleDateString()} - {new Date(data.date_end).toLocaleDateString()}</p>
-                        <a href={`http://localhost:5000/${data.filePath}`}  target="_blank" className="picture_wish"> รูปภาพประกอบ </a>
-                        <button onClick={() => handleStallPut(data)}>อนุมัติ</button>
-                        <button onClick={() => handleStallDelete(data)}>ไม่อนุมัติ</button>
-                    </div>
-                ))}
+                        <div key={index}>
+                            <p className="name_report">ชื่อร้านค้า {data.Name_shop} :</p> 
+                            <p className="place">lock {data.combinedKey}</p>
+                            <p className="place">สถานะ {data.status === "0" ? "รอ" : ""}</p>
+                            <p className="date">ตั้งแต่วันที่ {new Date(data.date_start).toLocaleDateString()} - {new Date(data.date_end).toLocaleDateString()}</p>
+                            <a href={`http://localhost:5000/${data.filePath}`} target="_blank" className="picture_wish"> รูปภาพประกอบ </a>
+                            <button onClick={() => handleStallPut(data)}>อนุมัติ</button>
+                            <button onClick={() => handleStallDelete(data)}>ไม่อนุมัติ</button>
+                        </div>
+                    ))}
 
                 </div>
                 </div>
