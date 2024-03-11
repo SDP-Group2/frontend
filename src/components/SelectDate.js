@@ -36,7 +36,7 @@ const SelectDate = ({ handleDateChange }) => {
       <div className="date_picker_container">
         <div className="date_picker_item">
           <label>วันที่เริ่ม:</label>
-          <DatePicker
+          <DatePicker 
             className='box_date'
             selected={startDate}
             onChange={(date) => handleStartDateChange(date)} 
