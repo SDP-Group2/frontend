@@ -1,266 +1,101 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+/* AdminDashboard.css */
 
 .admin_dashboard {
     display: flex;
     flex-direction: column;
-    padding: 20px;
-    font-family: "Inter", sans-serif;
-}
-
-.admin_dashboard .financial {
-    display: flex;
-
-}
-
-.admin_dashboard .financial div h4{
-    color: #7C7174;
-    margin: 10px 20px 0px 20px;
-
-}
-
-.admin_dashboard .financial .graph_market {
-    width: 360px;
-    height: 190px;
-    margin: 20px 20px 20px 0px;
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-}
-
-.admin_dashboard .financial .graph_financial {
-    width: 360px;
-    height: 190px;
-    margin: 20px 20px 20px 0px;
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-}
-
-.admin_dashboard .financial .notification {
-    width: 100%;
-    height: 190px;
-    margin: 20px 0px 20px 0px;
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-}
-
-.admin_dashboard .infor_market {
-    width: 100%;
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-}
-
-.admin_dashboard .infor_market h4{
-    color: #7C7174;
-    margin: 10px 20px 0px 20px;
-}
-
-.admin_dashboard .infor_market .div_market {
-    display: flex;
-}
-
-.admin_dashboard .infor_market .div_market .number{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
     align-items: center;
-    width: 50px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    color: #53726E;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.admin_dashboard .infor_market .div_market .number h5{
-    height: 20px;
-    margin: 0px;
-}
-
-.admin_dashboard .infor_market .name_col{
-    display: flex;
-    justify-content: space-between;
-    height: 45px;
-    color: #53726E;
-    padding-left: 50px;
-    padding-right: 20px;
-}
-
-.admin_dashboard .infor_market .name_col h5{
-    width: 60px;
-    text-align: center;
-}
-
-.admin_dashboard .infor_market .div_market .all_market {
-    display: flex;
-    justify-content: space-between;
+    padding: 20px;
+  }
+  
+  .nav {
     width: 100%;
-    margin-top: 10px;
-    margin-right: 10px;
-    margin-bottom: 30px;
-}
-
-.admin_dashboard .infor_market .div_market .all_market .col_market {
-    width: 60px;
-}
-
-.admin_dashboard  .graph_market div{
     display: flex;
-}
-
-.admin_dashboard  .graph_market div div{
-    display: flex;
-    flex-direction: column;
-    width: 200px;
-}
-
-.admin_dashboard  .graph_market div div h4{
-    text-align: center;
-    font-size: 14px;
-    border-radius: 5px;
-}
-
-.admin_dashboard  .graph_market div div .free{
-    color: #737474;
-    background-color: #D9D9D9;
-}
-
-.admin_dashboard  .graph_market div div .reserved_admin{
-    margin-top: 20px;
-    color: #feffff;
-    background-color: #53726E;
-}
-
-.admin_dashboard  .graph_market div div .no_reserve{
-    color: #feffff;
-    background-color: #656262;
-}
-
-.admin_dashboard  .graph_financial{
-    font-size: 14px;
-}
-
-.admin_dashboard  .notification div{
-    display: flex;
-    font-size: 14px;
-    font-weight: bold;
-    margin: 15px;
-    border: 1px solid #53726E;
-    border-radius: 15px;
-}
-
-.admin_dashboard  .notification .name_report{
-    margin-left: 20px;
-    color: #666868;
-}
-
-.admin_dashboard  .notification .place{
-    margin-left: 5px;
-    color: #53726E;
-}
-
-.admin_dashboard .nav {
-    display: flex;
-    width: 100%;
-    height: 85px;
-    background-color: #53726E;
-    border-radius: 20px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-}
-
-.admin_dashboard .nav .nav_L {
-    display: flex;
-}
-
-.admin_dashboard .nav .nav_L .circle {
-    align-self: center;
-    width: 40px;
-    height: 40px;
-    margin: 20px;
-    border-radius: 20px;
-    background-color: #D9D9D9;
-}
-
-.admin_dashboard .nav .nav_L .infor_admin{
-    display: flex;
-    flex-direction: column;
     justify-content: center;
-    color: #e0e0e0;
-}
-
-.admin_dashboard .nav .nav_L .name_admin{
-    margin: 0px;
+    margin-bottom: 20px;
+  }
+  
+  .nav_L {
+    display: flex;
+    align-items: center;
+  }
+  
+  .circle {
+    width: 50px;
+    height: 50px;
+    background-color: #007bff;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+  
+  .infor_admin {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .name_admin {
     font-size: 18px;
     font-weight: bold;
-}
-
-.admin_dashboard .nav .nav_L .sub_title{
-    margin: 0px;
+    margin: 0;
+  }
+  
+  .sub_title {
     font-size: 14px;
-}
-
-.admin_dashboard .nav .nav_R {
-    display: flex;
-    width: 80%;
-    justify-content: end;
-}
-
-.admin_dashboard .nav .nav_R div{
-    align-self: center;
-    margin: 20px;
-    font-weight: bold;
-    color: #e8e8e8;
-}
-.financial {
-    margin-top: 20px; /* ระยะห่างข้างบน */
-}
-
-.notification {
-    border: 1px solid #ccc; /* เส้นขอบ */
-    padding: 10px;
-    margin-bottom: 20px; /* ระยะห่างด้านล่าง */
-}
-
-.notification h4 {
-    color: #333; /* สีข้อความหัวข้อ */
+    color: #6c757d;
+    margin: 0;
+  }
+  
+  .financial {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .notification {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  
+  .notification h4 {
     font-size: 20px;
-    margin-bottom: 10px; /* ระยะห่างด้านล่างของหัวข้อ */
-}
-
-.notification-item {
-    margin-bottom: 10px; /* ระยะห่างของรายการข้อมูล */
-}
-
-.name_report {
+    margin-bottom: 15px;
+  }
+  
+  .name_report {
     font-weight: bold;
-}
-
-.place {
-    margin-bottom: 5px; /* ระยะห่างด้านล่างของข้อความ */
-}
-
-a {
-    color: blue; /* สีลิงก์ */
-    text-decoration: none; /* การเข้ารหัสลิงค์ */
-    margin-right: 10px; /* ระยะห่างด้านขวาของลิงค์ */
-}
-
-a:hover {
-    text-decoration: underline; /* การเข้ารหัสลิงค์เมื่อโฮเวอร์ */
-}
-
-.notification-item a {
-    border: 1px solid #ccc; /* เส้นขอบ */
-    padding: 5px 10px; /* การเสียบแน่นเกินไป */
-    border-radius: 5px; /* มุมโค้ง */
-    text-decoration: none; /* การเข้ารหัสลิงค์ */
-    display: inline-block; /* การแสดงเป็นบล็อก */
-}
-
-.picture_wish{
-    margin-top: 1%;
-    margin-left: 10%;
-}
-
+    margin-bottom: 5px;
+  }
+  
+  .place, .date {
+    margin-bottom: 5px;
+  }
+  
+  .picture_wish {
+    margin-bottom: 10px;
+    display: block;
+    text-decoration: none;
+    color: #007bff;
+  }
+  
+  .picture_wish:hover {
+    text-decoration: underline;
+  }
+  
+  button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:focus {
+    outline: none;
+  }
+  
+  button:hover {
+    background-color: #007bff;
+    color: white;
+  }
+  

@@ -105,7 +105,7 @@ function Home() {
             </div>
             <h3>การจองของฉัน</h3>
             <div className="list_reserved">
-                {reservationData && reservationData.map((item, index) => (
+            {reservationData && reservationData.map((item, index) => (
                     <div className="reserved" key={index}>
                         <div className="infor-left">
                             <div>
@@ -129,13 +129,15 @@ function Home() {
                             </div>
                         </div>
                         <div className="infor-rigth">
-                        <FaTrash className="delete" onClick={() => handleDelete(item.Name_shop)} />
-                            <div className="state">
-                                {item.status === "1" ? 'อนุมัติ' : 'รอ'}
+                            <FaTrash className="delete" onClick={() => handleDelete(item.Name_shop)} />
+                            <div className="state" style={{ color: item.status === "1" ? 'green' : item.status === "0" ? 'white' : 'red' }}>
+                                {item.status === "1" ? 'อนุมัติ' : item.status === "0" ? 'รอ' : 'ไม่อนุมัติ'}
                             </div>
                         </div>
+
                     </div>
                 ))}
+
             </div>
         </div>
     );

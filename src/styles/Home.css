@@ -125,3 +125,6 @@
 .delete {
     margin-left: 5px;
 }
+.rejected {
+    color: rgb(247, 67, 67);
+}

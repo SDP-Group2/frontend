@@ -70,6 +70,51 @@ function AdminDashboard() {
         });
     };
 
+    const  handleNotificationDelete = (notification) => {
+        fetch(`http://localhost:5000/report/${notification.id_report}`, {
+            method: 'DELETE',
+            headers: {
+                "api-key": "2ff20d0d99465c2d929666dc96d0620dbbc48b2d79f575a3784ae786b76628a6",
+            },
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('Notification data successfully deleted.');
+                alert("ลบแจ้งเตือนแล้ว")
+                window.location.reload();
+            } else {
+                console.error('Failed to delete notification data.');
+            }
+        })
+        .catch(error => {
+            console.error('Error deleting notification data:', error);
+        });
+    };
+
+
+    const handleNotificationPut_wait = (notification) => {
+        console.log(notification);
+        fetch(`http://localhost:5000/report/wait/${notification.id_report}`, {
+            method: 'PUT',
+            headers: {
+                "api-key": "2ff20d0d99465c2d929666dc96d0620dbbc48b2d79f575a3784ae786b76628a6",
+            },
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('Notification data successfully updated.');
+                alert("กำลังดำเนินการ")
+                window.location.reload();
+            } else {
+                console.error('Failed to update notification data.');
+            }
+        })
+        .catch(error => {
+            console.error('Error updating notification data:', error);
+        }
+        );
+    };
+
     const handleStallPut = (stallData) => {
 
         fetch( `http://localhost:5000/stall/${stallData.ID_stall}`  , {
@@ -91,6 +136,29 @@ function AdminDashboard() {
             console.error('Error updating stall data:', error);
         });
     };
+    const handleStallDelete = (stallData) => {
+        fetch(`http://localhost:5000/stall/both/${stallData.ID_stall}`, {
+            method: 'DELETE',
+            headers: {
+                "api-key": "2ff20d0d99465c2d929666dc96d0620dbbc48b2d79f575a3784ae786b76628a6",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(stallData) 
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('Stall data successfully deleted.');
+                alert("ไม่อนุมัติแล้ว")
+                window.location.reload();
+            } else {
+                console.error('Failed to delete stall data.');
+            }
+        })
+        .catch(error => {
+            console.error('Error deleting stall data:', error);
+        });
+    };
+
 
     const mergeDataByName = (data) => {
         const mergedData = {};
@@ -124,6 +192,8 @@ function AdminDashboard() {
                         <p className="sub_title">ผู้ดูแลตลาด</p>
                     </div>
                 </div>
+                <div className="divider"></div>
+
             </div>
             <div className='financial'>
                 <div className='notification'>
@@ -134,6 +204,8 @@ function AdminDashboard() {
                             <p className="place">เหตุ   {notification.report}</p>
                             <a href={`http://localhost:5000/${notification.filePath}`}  target="_blank" className="picture_wish"> รูปภาพประกอบ </a>
                             <button onClick={() => handleNotificationPut(notification)}>ได้รับการแก้ไขแล้ว</button>
+                            <button onClick={() => handleNotificationPut_wait(notification)}>กำลังดำเนินการ</button>
+                            <button onClick={() => handleNotificationDelete(notification)}>ลบ</button>
                         </div>
                     ))}
                 </div>
@@ -142,16 +214,17 @@ function AdminDashboard() {
             <div className='financial'>
             <div className='notification'>
                     <h4>แสดงการขออนุมัติ</h4>
-                    {stallData.map((data, index) => (
-                        <div key={index}>
-                            <p className="name_report">ชื่อร้านค้า {data.Name_shop} :</p> 
-                            <p className="place">lock {data.combinedKey}</p>
-                            <p className="date">ตั้งแต่วันที่ {new Date(data.date_start).toLocaleDateString()} - {new Date(data.date_end).toLocaleDateString()}</p>
-                            <a href={`http://localhost:5000/${data.filePath}`}  target="_blank" className="picture_wish"> รูปภาพประกอบ </a>
-                            <button onClick={() => handleStallPut(data)}>อนุมัติ</button>
-                        </div>
-                        
-                    ))}
+                    {stallData.filter(data => data.status === "0").map((data, index) => (
+                    <div key={index}>
+                        <p className="name_report">ชื่อร้านค้า {data.Name_shop} :</p> 
+                        <p className="place">lock {data.combinedKey}</p>
+                        <p className="date">ตั้งแต่วันที่ {new Date(data.date_start).toLocaleDateString()} - {new Date(data.date_end).toLocaleDateString()}</p>
+                        <a href={`http://localhost:5000/${data.filePath}`}  target="_blank" className="picture_wish"> รูปภาพประกอบ </a>
+                        <button onClick={() => handleStallPut(data)}>อนุมัติ</button>
+                        <button onClick={() => handleStallDelete(data)}>ไม่อนุมัติ</button>
+                    </div>
+                ))}
+
                 </div>
                 </div>
         </div>

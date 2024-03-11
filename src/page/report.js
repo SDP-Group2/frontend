@@ -47,6 +47,7 @@ const Report = () =>{
             setReport('');
             setFile(null);
             alert('ขอบคุณสำหรับการรายงานปัญหา');
+            window.location.href = '/';
 
         }
         } catch (error) {
