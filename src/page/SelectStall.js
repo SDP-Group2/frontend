@@ -110,7 +110,7 @@ function SelectStall(props) {
     return (
         <div className="selectpage">
             <div className="nav_reserve">
-                <a href={`/CreateStore`}>
+                <a href='/'>
                 <GoChevronLeft size={40} color="gray" style={{ fontWeight: 'bold' }} />
                 </a>
                 <h2>จองล็อค</h2>
